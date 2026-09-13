@@ -1,0 +1,24 @@
+# F1 Tyre Degradation Intelligence — pinned dependencies
+# Tested with Python 3.10 / 3.11
+
+numpy>=1.26,<2.0
+pandas>=2.0,<2.3
+scipy>=1.11,<1.13
+
+# Bayesian SSM (hierarchical model, MCMC/NUTS)
+jax>=0.4.23,<0.5
+jaxlib>=0.4.23,<0.5
+numpyro>=0.13,<0.15
+
+# Classical benchmark model (ARIMA baseline)
+statsmodels>=0.14,<0.15
+
+# F1 timing/telemetry/weather data source
+fastf1>=3.3,<3.5
+
+# Streamlit dashboard + charts
+streamlit>=1.32,<1.40
+plotly>=5.20,<5.25
+
+# Flask standalone fallback dashboard (run_dashboard.py --mode web)
+flask>=3.0,<3.1
