@@ -95,14 +95,14 @@ Raw lap times lie about tyre wear. A car gets *faster* over a stint even as the 
   'tertiaryColor': '#1E1E1E'
 }}}%%
 flowchart TD
-    F1[🏁 FastF1 API<br/>Practice + Race telemetry] --> DP[data_pipeline.py<br/>ingestion, gap & fuel derivation, caching]
-    DP --> DS[driver_style.py<br/>DSI extraction from jerk & G-forces]
-    DP --> MD[model.py<br/>NumPyro hierarchical SSM + MCMC]
+  F1["🏁 FastF1 API<br/>Practice + Race telemetry"] --> DP["data_pipeline.py<br/>ingestion, gap & fuel derivation, caching"]
+  DP --> DS["driver_style.py<br/>DSI extraction from jerk & G-forces"]
+  DP --> MD["model.py<br/>NumPyro hierarchical SSM + MCMC"]
     DS --> MD
-    MD --> DD[dashboard_data.py<br/>checkpoints, pit windows, trust/calibration]
-    DD --> APP[app.py<br/>Flask + Plotly.js + Tailwind]
-    APP --> UI[🖥️ Dashboard<br/>localhost:5000]
-    CACHE[(cache/<br/>FastF1 + fitted-model cache)] <--> DP
+  MD --> DD["dashboard_data.py<br/>checkpoints, pit windows, trust/calibration"]
+  DD --> APP["app.py<br/>Flask + Plotly.js + Tailwind"]
+  APP --> UI["🖥️ Dashboard<br/>localhost:5000"]
+  CACHE[("cache/<br/>FastF1 + fitted-model cache")] <--> DP
     CACHE <--> MD
 ```
 
@@ -118,14 +118,14 @@ flowchart TD
   'tertiaryColor': '#1E1E1E'
 }}}%%
 flowchart LR
-    LAP[Observed lap time y_d,t] --> DECOMP{Decompose}
-    DECOMP --> ALPHA[Latent tyre state α_d,t]
-    DECOMP --> FUEL[Fuel penalty<br/>γ · fuel_d,t]
-    DECOMP --> TRAFFIC[Dirty-air penalty<br/>δ · exp(−gap/τ)]
-    DECOMP --> TRACK[Track evolution<br/>ρ · session_time]
-    DECOMP --> NOISE[Heavy-tailed noise<br/>Student-t, ν=4]
-    DSI[Driver Style Indicator] -.informs.-> ALPHA
-    ALPHA --> NEXT[Latent state at t+1<br/>compound-aware, pit-reset aware]
+  LAP["Observed lap time y_d,t"] --> DECOMP{"Decompose"}
+  DECOMP --> ALPHA["Latent tyre state α_d,t"]
+  DECOMP --> FUEL["Fuel penalty<br/>γ · fuel_d,t"]
+  DECOMP --> TRAFFIC["Dirty-air penalty<br/>δ · exp(−gap/τ)"]
+  DECOMP --> TRACK["Track evolution<br/>ρ · session_time"]
+  DECOMP --> NOISE["Heavy-tailed noise<br/>Student-t, ν=4"]
+  DSI["Driver Style Indicator"] -.informs.-> ALPHA
+  ALPHA --> NEXT["Latent state at t+1<br/>compound-aware, pit-reset aware"]
 ```
 
 ### 3. Practice → Race Validation Flow
